@@ -8,8 +8,6 @@
     <transfer name="RestConditionalAvailabilityPageSearchCollectionResponse">
         <property name="conditionalAvailabilityPeriods" type="RestConditionalAvailabilityPeriod[]"/>
         <property name="pagination" type="RestConditionalAvailabilityPageSearchPagination"/>
-        <property name="valueFacets" type="RestFacetSearchResult[]" singular="valueFacet"/>
-        <property name="rangeFacets" type="RestRangeSearchResult[]" singular="rangeFacet"/>
     </transfer>
 
     <transfer name="RestConditionalAvailabilityPeriod">
@@ -25,30 +23,5 @@
         <property name="currentPage" type="int" />
         <property name="maxPage" type="int" />
         <property name="currentItemsPerPage" type="int" />
-    </transfer>
-
-    <transfer name="RestRangeSearchResult">
-        <property name="name" type="string" />
-        <property name="localizedName" type="string" />
-        <property name="min" type="float" />
-        <property name="max" type="float" />
-        <property name="activeMin" type="float" />
-        <property name="activeMax" type="float" />
-        <property name="docCount" type="int" />
-        <property name="config" type="RestFacetConfig" />
-    </transfer>
-
-    <transfer name="RestFacetSearchResult">
-        <property name="name" type="string" />
-        <property name="localizedName" type="string" />
-        <property name="docCount" type="int" />
-        <property name="values" type="array" singular="value" />
-        <property name="activeValue" type="string" />
-        <property name="config" type="RestFacetConfig" />
-    </transfer>
-
-    <transfer name="RestFacetConfig">
-        <property name="parameterName" type="string" />
-        <property name="isMultiValued" type="bool" />
     </transfer>
 </transfers>
