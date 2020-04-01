@@ -36,7 +36,7 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     }
 
     /**
-     * @return \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPeriod\Mapper\ConditionalAvailabilityPageSearchMapperInterface
+     * @return \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapperInterface
      */
     protected function createConditionalAvailabilityPageSearchMapper(): ConditionalAvailabilityPageSearchMapperInterface
     {
