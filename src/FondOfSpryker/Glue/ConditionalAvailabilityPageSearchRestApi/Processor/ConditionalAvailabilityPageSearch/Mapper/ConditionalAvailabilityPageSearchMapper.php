@@ -29,8 +29,8 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
     }
 
     /**
-     * @param \Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer|array $restConditionalAvailabilityPeriodCollectionResponseTransfer
      * @param array $restSearchResponse
+     * @param \Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer $restConditionalAvailabilityPeriodCollectionResponseTransfer
      *
      * @return \Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer
      */
@@ -38,7 +38,8 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
         array $restSearchResponse,
         RestConditionalAvailabilityPageSearchCollectionResponseTransfer $restConditionalAvailabilityPeriodCollectionResponseTransfer
     ): RestConditionalAvailabilityPageSearchCollectionResponseTransfer {
-        if (!isset($restSearchResponse[static::SEARCH_RESULT_KEY_PERIODS])
+        if (
+            !isset($restSearchResponse[static::SEARCH_RESULT_KEY_PERIODS])
             || !is_array($restSearchResponse[static::SEARCH_RESULT_KEY_PERIODS])
         ) {
             return $restConditionalAvailabilityPeriodCollectionResponseTransfer;

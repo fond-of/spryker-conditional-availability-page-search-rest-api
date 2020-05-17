@@ -24,8 +24,6 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
      */
     protected function getConditionalAvailabilityPageSearchClient(): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
