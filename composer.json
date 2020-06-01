@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=7.1",
-    "fond-of-spryker/conditional-availability-page-search": "dev-master",
+    "fond-of-spryker/conditional-availability-page-search": "dev-spryker_upgrade",
     "spryker/glue-application": "^1.0.0"
   },
   "require-dev": {
