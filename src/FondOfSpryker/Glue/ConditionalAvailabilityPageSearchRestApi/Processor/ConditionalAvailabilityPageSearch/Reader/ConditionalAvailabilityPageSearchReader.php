@@ -13,6 +13,10 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class ConditionalAvailabilityPageSearchReader implements ConditionalAvailabilityPageSearchReaderInterface
 {
+    protected const DEFAULT_ITEMS_PER_PAGE = 12;
+    protected const PARAMETER_NAME_PAGE = 'page';
+    protected const PARAMETER_NAME_ITEMS_PER_PAGE = 'ipp';
+
     /**
      * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
      */
@@ -86,7 +90,14 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
      */
     protected function getAllRequestParameters(RestRequestInterface $restRequest): array
     {
-        return $restRequest->getHttpRequest()->query->all();
+        $params = $restRequest->getHttpRequest()->query->all();
+
+        if ($restRequest->getPage()) {
+            $params[static::PARAMETER_NAME_ITEMS_PER_PAGE] = $restRequest->getPage()->getLimit();
+            $params[static::PARAMETER_NAME_PAGE] = ($restRequest->getPage()->getOffset() / $restRequest->getPage()->getLimit()) + 1;
+        }
+
+        return $params;
     }
 
     /**
@@ -110,7 +121,7 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
         );
 
         if (!$restRequest->getPage()) {
-            $restRequest->setPage(new Page(0, 12));
+            $restRequest->setPage(new Page(0, static::DEFAULT_ITEMS_PER_PAGE));
         }
 
         return $response->addResource($restResource);
