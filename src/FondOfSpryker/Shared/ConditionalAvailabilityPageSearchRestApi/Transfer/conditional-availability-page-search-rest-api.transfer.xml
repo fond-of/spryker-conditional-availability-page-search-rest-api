@@ -8,6 +8,7 @@
     <transfer name="RestConditionalAvailabilityPageSearchCollectionResponse">
         <property name="conditionalAvailabilityPeriods" type="RestConditionalAvailabilityPeriod[]"/>
         <property name="pagination" type="RestConditionalAvailabilityPageSearchPagination"/>
+        <property name="sort" type="RestConditionalAvailabilityPageSearchSort"/>
     </transfer>
 
     <transfer name="RestConditionalAvailabilityPeriod">
@@ -16,6 +17,13 @@
         <property name="startAt" type="string" />
         <property name="endAt" type="string" />
         <property name="warehouseGroup" type="string" />
+    </transfer>
+
+    <transfer name="RestConditionalAvailabilityPageSearchPaginationSort">
+        <property name="sortParamNames" type="array" singular="sortParamNames"/>
+        <property name="sortParamLocalizedNames" type="array" singular="sortParamLocalizedNames"/>
+        <property name="currentSortParam" type="string"/>
+        <property name="currentSortOrder" type="string"/>
     </transfer>
 
     <transfer name="RestConditionalAvailabilityPageSearchPagination">
