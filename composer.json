@@ -13,8 +13,10 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
+    "fond-of-spryker/conditional-availability": "dev-master",
     "fond-of-spryker/conditional-availability-page-search": "dev-spryker_upgrade",
+    "fond-of-spryker/conditional-availability-page-search-rest-api-extension": "dev-master",
     "spryker/glue-application": "^1.0.0"
   },
   "require-dev": {

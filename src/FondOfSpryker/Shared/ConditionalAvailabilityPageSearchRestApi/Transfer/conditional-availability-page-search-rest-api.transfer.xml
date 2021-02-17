@@ -14,6 +14,7 @@
     <transfer name="RestConditionalAvailabilityPeriod">
         <property name="qty" type="int" />
         <property name="sku" type="string" />
+        <property name="earliestDeliveryDate" type="string" />
         <property name="startAt" type="string" />
         <property name="endAt" type="string" />
         <property name="warehouseGroup" type="string" />
