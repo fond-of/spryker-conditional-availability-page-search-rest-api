@@ -28,6 +28,6 @@ class QuantityRestConditionalAvailabilityPeriodMapperPlugin extends AbstractFact
             return $restConditionalAvailabilityPeriodTransfer;
         }
 
-        return $restConditionalAvailabilityPeriodTransfer->setQty($periodData['quantity']);
+        return $restConditionalAvailabilityPeriodTransfer->setQty($periodData[static::PERIOD_DATA_KEY_QUANTITY]);
     }
 }
