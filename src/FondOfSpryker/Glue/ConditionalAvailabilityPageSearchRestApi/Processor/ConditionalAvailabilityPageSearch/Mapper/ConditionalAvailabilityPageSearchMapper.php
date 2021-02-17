@@ -10,6 +10,20 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
     protected const SEARCH_RESULT_KEY_PERIODS = 'periods';
 
     /**
+     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[]
+     */
+    protected $restConditionalAvailabilityPeriodMapperPlugins;
+
+    /**
+     * @param \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[] $restConditionalAvailabilityPeriodMapperPlugins
+     */
+    public function __construct(
+        array $restConditionalAvailabilityPeriodMapperPlugins
+    ) {
+        $this->restConditionalAvailabilityPeriodMapperPlugins = $restConditionalAvailabilityPeriodMapperPlugins;
+    }
+
+    /**
      * @param array $searchResult
      *
      * @return \Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer
@@ -49,8 +63,12 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
             $restConditionalAvailabilityPeriodTransfer = (new RestConditionalAvailabilityPeriodTransfer())
                 ->fromArray($period, true);
 
-            if (isset($period['quantity'])) {
-                $restConditionalAvailabilityPeriodTransfer->setQty($period['quantity']);
+            foreach ($this->restConditionalAvailabilityPeriodMapperPlugins as $restConditionalAvailabilityPeriodMapperPlugin) {
+                $restConditionalAvailabilityPeriodTransfer = $restConditionalAvailabilityPeriodMapperPlugin
+                    ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
+                        $period,
+                        $restConditionalAvailabilityPeriodTransfer
+                    );
             }
 
             $restConditionalAvailabilityPeriodCollectionResponseTransfer->addConditionalAvailabilityPeriods(
