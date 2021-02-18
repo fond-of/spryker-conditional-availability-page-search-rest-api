@@ -181,6 +181,18 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->method('get')
             ->willReturn($this->requestParameter);
 
+        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+            ->method('getPage')
+            ->willReturn($this->pageInterfaceMock);
+
+        $this->pageInterfaceMock->expects($this->atLeastOnce())
+            ->method('getLimit')
+            ->willReturn(12);
+
+        $this->pageInterfaceMock->expects($this->atLeastOnce())
+            ->method('getOffset')
+            ->willReturn(12);
+
         $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock->expects($this->atLeastOnce())
             ->method('search')
             ->willReturn($this->searchResult);
@@ -211,9 +223,79 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->with($this->numFound)
             ->willReturn($this->restResponseInterfaceMock);
 
+        $this->restRequestInterfaceMock->expects($this->never())
+            ->method('setPage')
+            ->willReturnSelf();
+
+        $this->restResponseInterfaceMock->expects($this->atLeastOnce())
+            ->method('addResource')
+            ->with($this->restResourceInterfaceMock)
+            ->willReturnSelf();
+
+        $this->assertInstanceOf(
+            RestResponseInterface::class,
+            $this->conditionalAvailabilityPageSearchReader->get(
+                $this->restRequestInterfaceMock
+            )
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetWithoutPageParams(): void
+    {
+        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+            ->method('getHttpRequest')
+            ->willReturn($this->requestMock);
+
+        $this->parameterBagMock->expects($this->atLeastOnce())
+            ->method('all')
+            ->willReturn($this->allRequestParameters);
+
+        $this->parameterBagMock->expects($this->atLeastOnce())
+            ->method('get')
+            ->willReturn($this->requestParameter);
+
         $this->restRequestInterfaceMock->expects($this->atLeastOnce())
             ->method('getPage')
             ->willReturn(null);
+
+        $this->pageInterfaceMock->expects($this->never())
+            ->method('getLimit');
+
+        $this->pageInterfaceMock->expects($this->never())
+            ->method('getOffset');
+
+        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+            ->method('search')
+            ->willReturn($this->searchResult);
+
+        $this->conditionalAvailabilityPageSearchMapperInterfaceMock->expects($this->atLeastOnce())
+            ->method('mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer')
+            ->with($this->searchResult)
+            ->willReturn($this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock);
+
+        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+            ->method('createRestResource')
+            ->with(
+                ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
+                null,
+                $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock
+            )->willReturn($this->restResourceInterfaceMock);
+
+        $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects($this->atLeastOnce())
+            ->method('getPagination')
+            ->willReturn($this->restConditionalAvailabilityPageSearchPaginationTransferMock);
+
+        $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects($this->atLeastOnce())
+            ->method('getNumFound')
+            ->willReturn($this->numFound);
+
+        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+            ->method('createRestResponse')
+            ->with($this->numFound)
+            ->willReturn($this->restResponseInterfaceMock);
 
         $this->restRequestInterfaceMock->expects($this->atLeastOnce())
             ->method('setPage')
