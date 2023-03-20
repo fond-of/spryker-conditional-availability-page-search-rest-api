@@ -13,8 +13,19 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class ConditionalAvailabilityPageSearchReader implements ConditionalAvailabilityPageSearchReaderInterface
 {
+    /**
+     * @var int
+     */
     protected const DEFAULT_ITEMS_PER_PAGE = 12;
+
+    /**
+     * @var string
+     */
     protected const PARAMETER_NAME_PAGE = 'page';
+
+    /**
+     * @var string
+     */
     protected const PARAMETER_NAME_ITEMS_PER_PAGE = 'ipp';
 
     /**
@@ -58,7 +69,7 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
 
         $searchString = $this->getRequestParameter(
             $restRequest,
-            ConditionalAvailabilityPageSearchRestApiConfig::QUERY_STRING_PARAMETER
+            ConditionalAvailabilityPageSearchRestApiConfig::QUERY_STRING_PARAMETER,
         );
 
         $searchResult = $this->conditionalAvailabilityPageSearchClient->search($searchString, $requestParameters);
@@ -68,7 +79,7 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
 
         return $this->buildCollectionResponse(
             $restRequest,
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer,
         );
     }
 
@@ -113,11 +124,11 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
         $restResource = $this->restResourceBuilder->createRestResource(
             ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
             null,
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer,
         );
 
         $response = $this->restResourceBuilder->createRestResponse(
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer->getPagination()->getNumFound()
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer->getPagination()->getNumFound(),
         );
 
         if (!$restRequest->getPage()) {

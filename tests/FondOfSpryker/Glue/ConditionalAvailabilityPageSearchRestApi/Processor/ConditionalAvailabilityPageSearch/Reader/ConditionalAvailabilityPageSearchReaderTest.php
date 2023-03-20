@@ -160,7 +160,7 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $this->conditionalAvailabilityPageSearchReader = new ConditionalAvailabilityPageSearchReader(
             $this->restResourceBuilderInterfaceMock,
             $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock,
-            $this->conditionalAvailabilityPageSearchMapperInterfaceMock
+            $this->conditionalAvailabilityPageSearchMapperInterfaceMock,
         );
     }
 
@@ -207,7 +207,7 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->with(
                 ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
                 null,
-                $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock
+                $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock,
             )->willReturn($this->restResourceInterfaceMock);
 
         $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects($this->atLeastOnce())
@@ -235,8 +235,8 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $this->assertInstanceOf(
             RestResponseInterface::class,
             $this->conditionalAvailabilityPageSearchReader->get(
-                $this->restRequestInterfaceMock
-            )
+                $this->restRequestInterfaceMock,
+            ),
         );
     }
 
@@ -281,7 +281,7 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->with(
                 ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
                 null,
-                $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock
+                $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock,
             )->willReturn($this->restResourceInterfaceMock);
 
         $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects($this->atLeastOnce())
@@ -309,8 +309,8 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $this->assertInstanceOf(
             RestResponseInterface::class,
             $this->conditionalAvailabilityPageSearchReader->get(
-                $this->restRequestInterfaceMock
-            )
+                $this->restRequestInterfaceMock,
+            ),
         );
     }
 }

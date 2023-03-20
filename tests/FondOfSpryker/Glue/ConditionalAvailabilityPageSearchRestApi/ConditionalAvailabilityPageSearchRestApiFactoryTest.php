@@ -49,11 +49,11 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityPageSearchClientMock = $this->getMockBuilder(
-            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class
+            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class,
         )->disableOriginalConstructor()->getMock();
 
         $this->conditionalAvailabilityServiceMock = $this->getMockBuilder(
-            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface::class
+            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface::class,
         )->disableOriginalConstructor()->getMock();
 
         $this->restResourceBuilderMock = $this->getMockBuilder(RestResourceBuilderInterface::class)
@@ -99,16 +99,16 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
             ->method('get')
             ->withConsecutive(
                 [ConditionalAvailabilityPageSearchRestApiDependencyProvider::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH],
-                [ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER]
+                [ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER],
             )
             ->willReturnOnConsecutiveCalls(
                 $this->conditionalAvailabilityPageSearchClientMock,
-                []
+                [],
             );
 
         static::assertInstanceOf(
             ConditionalAvailabilityPageSearchReader::class,
-            $this->conditionalAvailabilityPageSearchRestApiFactory->createConditionalAvailabilityPageSearchReader()
+            $this->conditionalAvailabilityPageSearchRestApiFactory->createConditionalAvailabilityPageSearchReader(),
         );
     }
 
@@ -124,13 +124,13 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(
-                ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY
+                ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY,
             )
             ->willReturn($this->conditionalAvailabilityServiceMock);
 
         static::assertInstanceOf(
             EarliestDeliveryDateGenerator::class,
-            $this->conditionalAvailabilityPageSearchRestApiFactory->createEarliestDeliveryDateGenerator()
+            $this->conditionalAvailabilityPageSearchRestApiFactory->createEarliestDeliveryDateGenerator(),
         );
     }
 }

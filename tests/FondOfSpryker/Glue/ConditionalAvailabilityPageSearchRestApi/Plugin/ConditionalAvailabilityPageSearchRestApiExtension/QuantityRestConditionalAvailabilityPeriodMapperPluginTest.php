@@ -51,12 +51,12 @@ class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
         $restConditionalAvailabilityPeriodTransfer = $this->quantityRestConditionalAvailabilityPeriodMapperPlugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                 $this->periodData,
-                $this->restConditionalAvailabilityPeriodTransferMock
+                $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
         static::assertEquals(
             $this->restConditionalAvailabilityPeriodTransferMock,
-            $restConditionalAvailabilityPeriodTransfer
+            $restConditionalAvailabilityPeriodTransfer,
         );
     }
 
@@ -71,12 +71,12 @@ class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
         $restConditionalAvailabilityPeriodTransfer = $this->quantityRestConditionalAvailabilityPeriodMapperPlugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                 [],
-                $this->restConditionalAvailabilityPeriodTransferMock
+                $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
         static::assertEquals(
             $this->restConditionalAvailabilityPeriodTransferMock,
-            $restConditionalAvailabilityPeriodTransfer
+            $restConditionalAvailabilityPeriodTransfer,
         );
     }
 }

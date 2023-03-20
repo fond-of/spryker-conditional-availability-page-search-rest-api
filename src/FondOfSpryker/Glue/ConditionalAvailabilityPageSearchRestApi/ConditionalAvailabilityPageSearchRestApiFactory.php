@@ -22,7 +22,7 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
         return new ConditionalAvailabilityPageSearchReader(
             $this->getResourceBuilder(),
             $this->getConditionalAvailabilityPageSearchClient(),
-            $this->createConditionalAvailabilityPageSearchMapper()
+            $this->createConditionalAvailabilityPageSearchMapper(),
         );
     }
 
@@ -32,7 +32,7 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     protected function getConditionalAvailabilityPageSearchClient(): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchRestApiDependencyProvider::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH
+            ConditionalAvailabilityPageSearchRestApiDependencyProvider::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
         );
     }
 
@@ -42,17 +42,17 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     protected function createConditionalAvailabilityPageSearchMapper(): ConditionalAvailabilityPageSearchMapperInterface
     {
         return new ConditionalAvailabilityPageSearchMapper(
-            $this->getRestConditionalAvailabilityPeriodMapperPlugins()
+            $this->getRestConditionalAvailabilityPeriodMapperPlugins(),
         );
     }
 
     /**
-     * @return \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[]
+     * @return array<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
     protected function getRestConditionalAvailabilityPeriodMapperPlugins(): array
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER
+            ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER,
         );
     }
 
@@ -62,7 +62,7 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     protected function getConditionalAvailabilityService(): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY
+            ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY,
         );
     }
 
@@ -72,7 +72,7 @@ class ConditionalAvailabilityPageSearchRestApiFactory extends AbstractFactory
     public function createEarliestDeliveryDateGenerator(): EarliestDeliveryDateGeneratorInterface
     {
         return new EarliestDeliveryDateGenerator(
-            $this->getConditionalAvailabilityService()
+            $this->getConditionalAvailabilityService(),
         );
     }
 }

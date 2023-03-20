@@ -7,15 +7,18 @@ use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
 
 class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailabilityPageSearchMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_KEY_PERIODS = 'periods';
 
     /**
-     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[]
+     * @var array<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
     protected $restConditionalAvailabilityPeriodMapperPlugins;
 
     /**
-     * @param \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[] $restConditionalAvailabilityPeriodMapperPlugins
+     * @param array<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface> $restConditionalAvailabilityPeriodMapperPlugins
      */
     public function __construct(
         array $restConditionalAvailabilityPeriodMapperPlugins
@@ -36,7 +39,7 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
 
         $restConditionalAvailabilityPeriodCollectionResponseTransfer = $this->mapSearchResultToRestConditionalAvailabilityPeriodTransfers(
             $searchResult,
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer,
         );
 
         return $restConditionalAvailabilityPeriodCollectionResponseTransfer;
@@ -67,12 +70,12 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
                 $restConditionalAvailabilityPeriodTransfer = $restConditionalAvailabilityPeriodMapperPlugin
                     ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                         $period,
-                        $restConditionalAvailabilityPeriodTransfer
+                        $restConditionalAvailabilityPeriodTransfer,
                     );
             }
 
             $restConditionalAvailabilityPeriodCollectionResponseTransfer->addConditionalAvailabilityPeriods(
-                $restConditionalAvailabilityPeriodTransfer
+                $restConditionalAvailabilityPeriodTransfer,
             );
         }
 

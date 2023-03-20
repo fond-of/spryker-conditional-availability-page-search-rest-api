@@ -92,26 +92,26 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProviderTest extends Uni
             ->withConsecutive(['client'], ['service'])
             ->willReturnOnConsecutiveCalls(
                 $this->conditionalAvailabilityPageSearchClientMock,
-                $this->conditionalAvailabilityServiceMock
+                $this->conditionalAvailabilityServiceMock,
             );
 
         $container = $this->conditionalAvailabilityPageSearchRestApiDependencyProvider->provideDependencies(
-            $this->containerMock
+            $this->containerMock,
         );
 
         static::assertInstanceOf(
             ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class,
-            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH]
+            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH],
         );
 
         static::assertInstanceOf(
             ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface::class,
-            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY]
+            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
         );
 
         static::assertCount(
             0,
-            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER]
+            $container[ConditionalAvailabilityPageSearchRestApiDependencyProvider::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER],
         );
     }
 }

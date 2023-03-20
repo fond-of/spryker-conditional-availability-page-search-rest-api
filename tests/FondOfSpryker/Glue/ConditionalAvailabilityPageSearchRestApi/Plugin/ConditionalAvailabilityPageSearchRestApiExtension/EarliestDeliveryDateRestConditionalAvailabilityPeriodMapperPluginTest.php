@@ -58,7 +58,7 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
 
         $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin = new EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin();
         $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin->setFactory(
-            $this->conditionalAvailabilityPageSearchRestApiFactoryMock
+            $this->conditionalAvailabilityPageSearchRestApiFactoryMock,
         );
     }
 
@@ -82,12 +82,12 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
         $restConditionalAvailabilityPeriodTransfer = $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                 $this->periodData,
-                $this->restConditionalAvailabilityPeriodTransferMock
+                $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
         static::assertEquals(
             $this->restConditionalAvailabilityPeriodTransferMock,
-            $restConditionalAvailabilityPeriodTransfer
+            $restConditionalAvailabilityPeriodTransfer,
         );
     }
 
@@ -116,12 +116,12 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
         $restConditionalAvailabilityPeriodTransfer = $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                 $this->periodData,
-                $this->restConditionalAvailabilityPeriodTransferMock
+                $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
         static::assertEquals(
             $this->restConditionalAvailabilityPeriodTransferMock,
-            $restConditionalAvailabilityPeriodTransfer
+            $restConditionalAvailabilityPeriodTransfer,
         );
     }
 }

@@ -9,10 +9,19 @@ use Spryker\Glue\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH = 'CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH';
 
+    /**
+     * @var string
+     */
     public const PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER = 'PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER';
 
+    /**
+     * @var string
+     */
     public const SERVICE_CONDITIONAL_AVAILABILITY = 'SERVICE_CONDITIONAL_AVAILABILITY';
 
     /**
@@ -40,7 +49,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
     {
         $container[static::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
-                $container->getLocator()->conditionalAvailabilityPageSearch()->client()
+                $container->getLocator()->conditionalAvailabilityPageSearch()->client(),
             );
         };
 
@@ -59,7 +68,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
     }
 
     /**
-     * @return \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[]
+     * @return array<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
     protected function getRestConditionalAvailabilityPeriodMapperPlugins(): array
     {
@@ -75,7 +84,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
     {
         $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
-                $container->getLocator()->conditionalAvailability()->service()
+                $container->getLocator()->conditionalAvailability()->service(),
             );
         };
 

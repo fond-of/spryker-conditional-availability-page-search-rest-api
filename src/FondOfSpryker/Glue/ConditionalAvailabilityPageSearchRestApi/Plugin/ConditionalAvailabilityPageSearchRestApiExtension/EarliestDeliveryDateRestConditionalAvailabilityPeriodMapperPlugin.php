@@ -33,7 +33,7 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin extends 
         }
 
         return $restConditionalAvailabilityPeriodTransfer->setEarliestDeliveryDate(
-            $earliestDeliveryDate->format('Y-m-d H:i:s')
+            $earliestDeliveryDate->format('Y-m-d H:i:s'),
         );
     }
 }
