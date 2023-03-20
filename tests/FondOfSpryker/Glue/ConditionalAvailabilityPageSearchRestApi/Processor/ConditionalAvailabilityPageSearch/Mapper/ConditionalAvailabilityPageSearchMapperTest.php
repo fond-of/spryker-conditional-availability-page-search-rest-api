@@ -14,7 +14,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
     protected $searchResult;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
+     * @var array<\PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
     protected $restConditionalAvailabilityPeriodMapperPluginMocks;
 

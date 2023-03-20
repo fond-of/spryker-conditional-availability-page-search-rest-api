@@ -32,7 +32,7 @@ class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
     protected $restResponseMock;
 
     /**
-     * @var \FondOfSpryker\Glue\CompanyBusinessUnitsOrdersRestApi\Controller\CompanyBusinessUnitsOrdersResourceController
+     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Controller\ConditionalAvailabilityPageSearchResourceController
      */
     protected $conditionalAvailabilityPageSearchResourceController;
 
