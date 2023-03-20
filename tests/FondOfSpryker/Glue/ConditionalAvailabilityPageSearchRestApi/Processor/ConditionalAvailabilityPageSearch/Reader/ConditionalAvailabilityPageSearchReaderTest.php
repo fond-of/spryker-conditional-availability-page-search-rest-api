@@ -239,7 +239,6 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->method('getHttpRequest')
             ->willReturn($this->requestMock);
 
-
         $this->restRequestMock->expects($this->atLeastOnce())
             ->method('getPage')
             ->willReturn(null);
