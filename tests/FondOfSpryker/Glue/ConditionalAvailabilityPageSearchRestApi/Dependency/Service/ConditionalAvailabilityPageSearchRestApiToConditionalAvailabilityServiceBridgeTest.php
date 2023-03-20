@@ -38,7 +38,7 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBr
 
         $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge
             = new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
-                $this->conditionalAvailabilityServiceMock
+                $this->conditionalAvailabilityServiceMock,
             );
     }
 

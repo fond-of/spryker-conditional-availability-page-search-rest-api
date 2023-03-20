@@ -8,6 +8,9 @@ use Spryker\Glue\Kernel\AbstractFactory;
 
 class QuantityRestConditionalAvailabilityPeriodMapperPlugin extends AbstractFactory implements RestConditionalAvailabilityPeriodMapperPluginInterface
 {
+    /**
+     * @var string
+     */
     protected const PERIOD_DATA_KEY_QUANTITY = 'quantity';
 
     /**

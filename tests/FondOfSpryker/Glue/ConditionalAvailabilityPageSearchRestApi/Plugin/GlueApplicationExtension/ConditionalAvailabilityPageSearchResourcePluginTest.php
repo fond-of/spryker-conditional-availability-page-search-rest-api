@@ -44,8 +44,8 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
         $this->assertInstanceOf(
             ResourceRouteCollectionInterface::class,
             $this->conditionalAvailabilityPageSearchResourcePlugin->configure(
-                $this->resourceRouteCollectionInterfaceMock
-            )
+                $this->resourceRouteCollectionInterfaceMock,
+            ),
         );
     }
 
@@ -56,7 +56,7 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
     {
         $this->assertSame(
             ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceType()
+            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceType(),
         );
     }
 
@@ -67,7 +67,7 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
     {
         $this->assertSame(
             ConditionalAvailabilityPageSearchRestApiConfig::CONTROLLER_RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getController()
+            $this->conditionalAvailabilityPageSearchResourcePlugin->getController(),
         );
     }
 
@@ -78,7 +78,7 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
     {
         $this->assertSame(
             RestConditionalAvailabilityPageSearchRequestTransfer::class,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceAttributesClassName()
+            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceAttributesClassName(),
         );
     }
 }

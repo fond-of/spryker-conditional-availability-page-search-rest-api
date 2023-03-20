@@ -14,7 +14,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
     protected $searchResult;
 
     /**
-     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface[]|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject<\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
     protected $restConditionalAvailabilityPeriodMapperPluginMocks;
 
@@ -45,7 +45,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
         ];
 
         $this->conditionalAvailabilityPageSearchMapper = new ConditionalAvailabilityPageSearchMapper(
-            $this->restConditionalAvailabilityPeriodMapperPluginMocks
+            $this->restConditionalAvailabilityPeriodMapperPluginMocks,
         );
     }
 
@@ -67,15 +67,15 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
                         return $restConditionalAvailabilityPeriodTransfer->getSku() === $self->searchResult['periods'][0]['sku']
                             && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $self->searchResult['periods'][0]['warehouseGroup']
                             && $restConditionalAvailabilityPeriodTransfer->getQty() === null;
-                    }
-                )
+                    },
+                ),
             )->willReturnCallback(
                 static function (
                     array $periodData,
                     RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
                 ) {
                     return $restConditionalAvailabilityPeriodTransfer;
-                }
+                },
             );
 
         $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->conditionalAvailabilityPageSearchMapper
@@ -83,7 +83,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
 
         static::assertCount(
             1,
-            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods()
+            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods(),
         );
     }
 
@@ -100,7 +100,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
 
         static::assertCount(
             0,
-            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods()
+            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods(),
         );
     }
 }

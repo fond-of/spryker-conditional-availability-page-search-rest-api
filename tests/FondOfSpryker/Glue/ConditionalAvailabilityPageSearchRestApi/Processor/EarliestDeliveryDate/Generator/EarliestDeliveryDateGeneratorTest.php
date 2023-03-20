@@ -40,7 +40,7 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->getMock();
 
         $this->earliestDeliveryDateGenerator = new EarliestDeliveryDateGenerator(
-            $this->conditionalAvailabilityServiceMock
+            $this->conditionalAvailabilityServiceMock,
         );
     }
 
@@ -57,7 +57,7 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->method('generateEarliestDeliveryDateByDateTime');
 
         $earliestDeliveryDate = $this->earliestDeliveryDateGenerator->generateByRestConditionalAvailabilityPeriodTransfer(
-            $this->restConditionalAvailabilityPeriodTransferMock
+            $this->restConditionalAvailabilityPeriodTransferMock,
         );
 
         static::assertEquals(null, $earliestDeliveryDate);
@@ -88,7 +88,7 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->method('generateEarliestDeliveryDateByDateTime');
 
         $earliestDeliveryDate = $this->earliestDeliveryDateGenerator->generateByRestConditionalAvailabilityPeriodTransfer(
-            $this->restConditionalAvailabilityPeriodTransferMock
+            $this->restConditionalAvailabilityPeriodTransferMock,
         );
 
         static::assertEquals(null, $earliestDeliveryDate);
@@ -125,15 +125,15 @@ class EarliestDeliveryDateGeneratorTest extends Unit
                 static::callback(
                     static function (DateTime $earliestAvailabilityDate) {
                         return $earliestAvailabilityDate == (new DateTime())->setTime(0, 0);
-                    }
-                )
+                    },
+                ),
             )->willReturn($earliestDeliveryDate);
 
         static::assertEquals(
             $earliestDeliveryDate,
             $this->earliestDeliveryDateGenerator->generateByRestConditionalAvailabilityPeriodTransfer(
-                $this->restConditionalAvailabilityPeriodTransferMock
-            )
+                $this->restConditionalAvailabilityPeriodTransferMock,
+            ),
         );
     }
 }
