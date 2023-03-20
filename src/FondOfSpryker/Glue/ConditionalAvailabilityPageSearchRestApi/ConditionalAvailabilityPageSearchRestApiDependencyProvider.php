@@ -56,6 +56,11 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
         return $container;
     }
 
+    /**
+     * @param \Spryker\Glue\Kernel\Container $container
+     *
+     * @return \Spryker\Glue\Kernel\Container
+     */
     protected function addRestConditionalAvailabilityPeriodMapperPlugins(Container $container): Container
     {
         $self = $this;
