@@ -6,6 +6,11 @@ use Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionRes
 
 interface ConditionalAvailabilityPageSearchMapperInterface
 {
+    /**
+     * @param array $searchResult
+     *
+     * @return \Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer
+     */
     public function mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(
         array $searchResult
     ): RestConditionalAvailabilityPageSearchCollectionResponseTransfer;

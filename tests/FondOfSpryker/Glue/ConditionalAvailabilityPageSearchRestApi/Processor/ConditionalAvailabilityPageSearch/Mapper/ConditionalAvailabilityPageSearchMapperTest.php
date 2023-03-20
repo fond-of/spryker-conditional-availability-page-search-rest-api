@@ -3,19 +3,25 @@
 namespace FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer;
+use FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface;
+use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
 
 class ConditionalAvailabilityPageSearchMapperTest extends Unit
 {
     /**
-     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapper
-     */
-    protected $conditionalAvailabilityPageSearchMapper;
-
-    /**
      * @var array
      */
     protected $searchResult;
+
+    /**
+     * @var array<\PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
+     */
+    protected $restConditionalAvailabilityPeriodMapperPluginMocks;
+
+    /**
+     * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapper
+     */
+    protected $conditionalAvailabilityPageSearchMapper;
 
     /**
      * @return void
@@ -26,11 +32,21 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
             'periods' => [
                 [
                     'quantity' => 12,
+                    'sku' => 'FOO-BAR-001-001',
+                    'warehouseGroup' => 'EU',
                 ],
             ],
         ];
 
-        $this->conditionalAvailabilityPageSearchMapper = new ConditionalAvailabilityPageSearchMapper();
+        $this->restConditionalAvailabilityPeriodMapperPluginMocks = [
+            $this->getMockBuilder(RestConditionalAvailabilityPeriodMapperPluginInterface::class)
+                ->disableOriginalConstructor()
+                ->getMock(),
+        ];
+
+        $this->conditionalAvailabilityPageSearchMapper = new ConditionalAvailabilityPageSearchMapper(
+            $this->restConditionalAvailabilityPeriodMapperPluginMocks,
+        );
     }
 
     /**
@@ -38,11 +54,36 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
      */
     public function testMapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(): void
     {
-        $this->assertInstanceOf(
-            RestConditionalAvailabilityPageSearchCollectionResponseTransfer::class,
-            $this->conditionalAvailabilityPageSearchMapper->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(
-                $this->searchResult
-            )
+        $self = $this;
+
+        $this->restConditionalAvailabilityPeriodMapperPluginMocks[0]->expects(static::atLeastOnce())
+            ->method('mapPeriodDataToRestConditionalAvailabilityPeriodTransfer')
+            ->with(
+                $this->searchResult['periods'][0],
+                static::callback(
+                    static function (
+                        RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
+                    ) use ($self) {
+                        return $restConditionalAvailabilityPeriodTransfer->getSku() === $self->searchResult['periods'][0]['sku']
+                            && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $self->searchResult['periods'][0]['warehouseGroup']
+                            && $restConditionalAvailabilityPeriodTransfer->getQty() === null;
+                    },
+                ),
+            )->willReturnCallback(
+                static function (
+                    array $periodData,
+                    RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
+                ) {
+                    return $restConditionalAvailabilityPeriodTransfer;
+                },
+            );
+
+        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->conditionalAvailabilityPageSearchMapper
+            ->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer($this->searchResult);
+
+        static::assertCount(
+            1,
+            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods(),
         );
     }
 
@@ -51,11 +92,15 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
      */
     public function testMapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransferEmpty(): void
     {
-        $this->assertInstanceOf(
-            RestConditionalAvailabilityPageSearchCollectionResponseTransfer::class,
-            $this->conditionalAvailabilityPageSearchMapper->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(
-                []
-            )
+        $this->restConditionalAvailabilityPeriodMapperPluginMocks[0]->expects(static::never())
+            ->method('mapPeriodDataToRestConditionalAvailabilityPeriodTransfer');
+
+        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->conditionalAvailabilityPageSearchMapper
+            ->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer([]);
+
+        static::assertCount(
+            0,
+            $restConditionalAvailabilityPageSearchCollectionResponseTransfer->getConditionalAvailabilityPeriods(),
         );
     }
 }

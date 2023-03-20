@@ -14,6 +14,21 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 class ConditionalAvailabilityPageSearchReader implements ConditionalAvailabilityPageSearchReaderInterface
 {
     /**
+     * @var int
+     */
+    protected const DEFAULT_ITEMS_PER_PAGE = 12;
+
+    /**
+     * @var string
+     */
+    protected const PARAMETER_NAME_PAGE = 'page';
+
+    /**
+     * @var string
+     */
+    protected const PARAMETER_NAME_ITEMS_PER_PAGE = 'ipp';
+
+    /**
      * @var \FondOfSpryker\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
      */
     protected $conditionalAvailabilityPageSearchClient;
@@ -54,7 +69,7 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
 
         $searchString = $this->getRequestParameter(
             $restRequest,
-            ConditionalAvailabilityPageSearchRestApiConfig::QUERY_STRING_PARAMETER
+            ConditionalAvailabilityPageSearchRestApiConfig::QUERY_STRING_PARAMETER,
         );
 
         $searchResult = $this->conditionalAvailabilityPageSearchClient->search($searchString, $requestParameters);
@@ -64,7 +79,7 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
 
         return $this->buildCollectionResponse(
             $restRequest,
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer,
         );
     }
 
@@ -86,7 +101,14 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
      */
     protected function getAllRequestParameters(RestRequestInterface $restRequest): array
     {
-        return $restRequest->getHttpRequest()->query->all();
+        $params = $restRequest->getHttpRequest()->query->all();
+
+        if ($restRequest->getPage()) {
+            $params[static::PARAMETER_NAME_ITEMS_PER_PAGE] = $restRequest->getPage()->getLimit();
+            $params[static::PARAMETER_NAME_PAGE] = ($restRequest->getPage()->getOffset() / $restRequest->getPage()->getLimit()) + 1;
+        }
+
+        return $params;
     }
 
     /**
@@ -102,15 +124,15 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
         $restResource = $this->restResourceBuilder->createRestResource(
             ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
             null,
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer,
         );
 
         $response = $this->restResourceBuilder->createRestResponse(
-            $restConditionalAvailabilityPeriodCollectionResponseTransfer->getPagination()->getNumFound()
+            $restConditionalAvailabilityPeriodCollectionResponseTransfer->getPagination()->getNumFound(),
         );
 
         if (!$restRequest->getPage()) {
-            $restRequest->setPage(new Page(0, 12));
+            $restRequest->setPage(new Page(0, static::DEFAULT_ITEMS_PER_PAGE));
         }
 
         return $response->addResource($restResource);

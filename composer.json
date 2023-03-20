@@ -13,18 +13,16 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=8.0",
+    "fond-of-spryker/conditional-availability": "dev-master",
     "fond-of-spryker/conditional-availability-page-search": "dev-master",
+    "fond-of-spryker/conditional-availability-page-search-rest-api-extension": "dev-main",
     "spryker/glue-application": "^1.0.0"
   },
   "require-dev": {
-    "spryker/code-sniffer": "^0.12",
-    "codeception/codeception": "^2.4",
-    "mikey179/vfsstream": "^1.6",
-    "phpro/grumphp": "^0.14",
-    "sebastian/phpcpd": "^4.0",
-    "php-coveralls/php-coveralls": "^2.1",
-    "fond-of-codeception/spryker": "dev-master"
+    "fond-of-codeception/spryker": "^1.0 || ^2.0",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -36,7 +34,13 @@
   "autoload-dev": {
     "psr-4": {
       "FondOfSpryker\\": "tests/FondOfSpryker/",
-      "Generated\\": "src/Generated/"
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

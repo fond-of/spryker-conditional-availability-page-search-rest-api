@@ -34,7 +34,7 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearc
         $this->searchString = 'search-string';
 
         $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge = new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
-            $this->conditionalAvailabilityPageSearchClientInterfaceMock
+            $this->conditionalAvailabilityPageSearchClientInterfaceMock,
         );
     }
 
@@ -50,8 +50,8 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearc
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge->search(
-                $this->searchString
-            )
+                $this->searchString,
+            ),
         );
     }
 }
